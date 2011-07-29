@@ -31,9 +31,6 @@
 - (BOOL) activeWWAN;
 - (BOOL) performWiFiCheck;
 
-- (BOOL) forceWWAN; // via Apple
-- (void) shutdownWWAN; // via Apple
-
 - (BOOL) scheduleReachabilityWatcher: (id) watcher;
 - (void) unscheduleReachabilityWatcher;
 

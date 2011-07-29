@@ -16,7 +16,7 @@
 #import <dlfcn.h>
 
 #import "UIDevice-Reachability.h"
-#import "wwanconnect.h"
+//#import "wwanconnect.h"
 
 @implementation UIDevice (Reachability)
 SCNetworkConnectionFlags connectionFlags;
@@ -224,27 +224,6 @@ SCNetworkReachabilityRef reachability;
 		return NO;
 	}
 	return YES;
-}
-
-#pragma mark Forcing WWAN connection. Courtesy of Apple. Thank you Apple.
-MyStreamInfoPtr	myInfoPtr;
-static void myClientCallback(void *refCon)
-{
-	int  *val = (int*)refCon;
-	printf("myClientCallback entered - value from refCon is %d\n", *val);
-}
-
-- (BOOL) forceWWAN
-{
-	int value = 0;
-	myInfoPtr = (MyStreamInfoPtr) StartWWAN(myClientCallback, &value);
-	NSLog(@"%@", myInfoPtr ? @"Started WWAN" : @"Failed to start WWAN");
-	return (!(myInfoPtr == NULL));
-}
-
-- (void) shutdownWWAN
-{
-	if (myInfoPtr) StopWWAN((MyInfoRef) myInfoPtr);
 }
 
 #pragma mark Monitoring reachability
