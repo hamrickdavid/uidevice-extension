@@ -101,7 +101,11 @@ SCNetworkReachabilityRef reachability;
 			if (cursor->ifa_addr->sa_family == AF_INET && (cursor->ifa_flags & IFF_LOOPBACK) == 0) 
 			{
 				NSString *name = [NSString stringWithUTF8String:cursor->ifa_name];
-				if ([name isEqualToString:@"en0"])  // Wi-Fi adapter
+				NSString* wifiAdapterName = @"en0";
+				#if TARGET_IPHONE_SIMULATOR
+				wifiAdapterName = @"en1";
+				#endif
+				if ([name isEqualToString:wifiAdapterName])  // Wi-Fi adapter
 					return [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)cursor->ifa_addr)->sin_addr)];
 			}
 			cursor = cursor->ifa_next;

@@ -7,6 +7,8 @@
  */
 
 #import <UIKit/UIKit.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 #define SUPPORTS_UNDOCUMENTED_API	0
 
